@@ -9,19 +9,21 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:snomed="http://purl.bioontology.org/ontology/SNOMEDCT/"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:obo="http://purl.obolibrary.org/obo/"
     xmlns:mmo="http://purl.org/mit/mmo">
 
     <!-- Metadata block describing the SNOMED ontology module and its publication details. -->    
     <!-- Contains versioning, licensing, authorship and rights declarations. -->
-    <owl:Ontology rdf:about="http://purl.org/hitop">
+    <owl:Ontology rdf:about="http://purl.org/mit/mmo/modules/snomed">
         <obo:iaoIAO_0000115 rdf:resource="http://purl.obolibrary.org/obo/iao.owl"/>
+        <dc:title>SNOMED Ontology Module for Meta Mesh Ontology</dc:title>
+        <dcterms:title>SNOMED Ontology Module for Meta Mesh Ontology</dcterms:title>
         <dcterms:contributor>Dr. Rogério Blitz</dcterms:contributor>
         <dcterms:creator rdf:resource="https://orcid.org/0000-0002-4505-4593"/>
         <dcterms:created>2025-05-07</dcterms:created>
         <dcterms:modified>2025-09-03</dcterms:modified>
-        <dcterms:hasVersion rdf:resource="http://purl.org/dc/terms/1.1"/>
-        <dcterms:isVersionOf rdf:resource="http://purl.org/dc/terms/1.1"/>
-        <dcterms:issued rdf:resource="http://purl.org/dc/terms/1.1"/>
+        <dcterms:hasVersion>0.1.1</dcterms:hasVersion>
+        <dcterms:isVersionOf rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
         <!--<dcterms:issued>2025-XX-XX</dcterms:issued>-->
         <dcterms:license rdf:resource="https://opensource.org/licenses/MIT"/>
         <dcterms:publisher>Dr. Rogério Blitz</dcterms:publisher>
@@ -32,8 +34,7 @@
             This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology.
             It supports reasoning-compatible classification while preserving original semantic context.
         </rdfs:comment>
-        <rdfs:seeAlso rdf:resource="https://www.hitop-system.org/"/>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1.0</owl:versionInfo>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1.1</owl:versionInfo>
         <skos:changeNote rdf:resource="https://www.w3.org/2009/08/skos-reference/skos.html"/>
     </owl:Ontology>
 
@@ -50,11 +51,16 @@
         <mmo:isBFOCompliant xsd:datatype="xsd:boolean">true</mmo:isBFOCompliant>
         <mmo:scope>specific</mmo:scope>
         <mmo:useCase>Integration of SNOMED concepts into the MMO</mmo:useCase>
+        <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#1144814003"/>
+        <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#44186003"/>
+        <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#1144748009"/>
+        <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#816160009"/>
+        <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#6471006"/>
     </mmo:OntologyModule>
 
     <!-- Describes slowed physical and mental movements, commonly seen in depression. -->
     <!-- Classified as a neuropsychiatric symptom in SNOMED CT. -->
-    <owl:Class rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/1144814003">
+    <owl:Class rdf:about="http://purl.org/mit/mmo/modules/snomed#1144814003">
         <rdfs:label>Psychomotor retardation</rdfs:label>
         <rdfs:comment>Slowing of thought and movement, often associated with major depressive disorder.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/43994002"/>
@@ -69,7 +75,7 @@
 
     <!-- Group of sleep disorders involving difficulty falling or staying asleep. -->
     <!-- Includes insomnia and other sleep pattern disruptions. -->
-    <owl:Class rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/44186003">
+    <owl:Class rdf:about="http://purl.org/mit/mmo/modules/snomed#44186003">
         <rdfs:label>Dyssomnia</rdfs:label>
         <rdfs:comment>Disruption in the quality, timing, or amount of sleep affecting daily functioning.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/39898005"/>
@@ -85,7 +91,7 @@
 
     <!-- Clinical sign involving reduced ability to focus or maintain attention. -->
     <!-- Common in multiple neurological and psychiatric conditions. -->
-    <owl:Class rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/1144748009">
+    <owl:Class rdf:about="http://purl.org/mit/mmo/modules/snomed#1144748009">
         <rdfs:label>Impaired concentration</rdfs:label>
         <rdfs:comment>Reduced ability to direct, maintain, or shift attention appropriately.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/386806002"/>
@@ -98,7 +104,7 @@
 
     <!-- Describes unintentional body weight reduction. -->
     <!-- Often used as an indicator in nutritional and psychiatric evaluations. -->
-    <owl:Class rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/816160009">
+    <owl:Class rdf:about="http://purl.org/mit/mmo/modules/snomed#816160009">
         <rdfs:label>Weight loss</rdfs:label>
         <rdfs:comment>Involuntary loss of body mass over a defined period of time.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/363806002"/>    
@@ -113,7 +119,7 @@
 
     <!-- Involves thoughts or ideations of ending one's own life. -->
     <!-- Critical marker for mental health risk assessment and intervention. -->
-    <owl:Class rdf:about="http://purl.bioontology.org/ontology/SNOMEDCT/6471006">
+    <owl:Class rdf:about="http://purl.org/mit/mmo/modules/snomed#6471006">
         <rdfs:label>Suicidal thoughts</rdfs:label>
         <rdfs:comment>Ideation or mental imagery involving self-inflicted death.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/102911000"/>       
