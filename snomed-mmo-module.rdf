@@ -10,31 +10,31 @@
     xmlns:snomed="http://purl.bioontology.org/ontology/SNOMEDCT/"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:obo="http://purl.obolibrary.org/obo/"
-    xmlns:mmo="http://purl.org/mit/mmo">
+    xmlns:mmo="http://purl.org/mit/mmo#">
 
     <!-- Metadata block describing the SNOMED ontology module and its publication details. -->    
     <!-- Contains versioning, licensing, authorship and rights declarations. -->
     <owl:Ontology rdf:about="http://purl.org/mit/mmo/modules/snomed">
-        <obo:iaoIAO_0000115 rdf:resource="http://purl.obolibrary.org/obo/iao.owl"/>
+        <obo:IAO_0000115 rdf:resource="http://purl.obolibrary.org/obo/iao.owl"/>
         <dc:title>SNOMED Ontology Module for Meta Mesh Ontology</dc:title>
         <dcterms:title>SNOMED Ontology Module for Meta Mesh Ontology</dcterms:title>
         <dcterms:contributor>Dr. Rogério Blitz</dcterms:contributor>
         <dcterms:creator rdf:resource="https://orcid.org/0000-0002-4505-4593"/>
         <dcterms:created>2025-05-07</dcterms:created>
-        <dcterms:modified>2025-09-24</dcterms:modified>
-        <dcterms:hasVersion>0.1.2</dcterms:hasVersion>
+        <dcterms:modified>2025-10-09</dcterms:modified>
+        <dcterms:hasVersion>0.1.3</dcterms:hasVersion>
         <dcterms:isVersionOf rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
         <!--<dcterms:issued>2025-XX-XX</dcterms:issued>-->
         <dcterms:license rdf:resource="https://opensource.org/licenses/MIT"/>
         <dcterms:publisher>Dr. Rogério Blitz</dcterms:publisher>
-        <dcterms:rights>This work is licensed under the MIT License.</dcterms:rights>
+        <dcterms:rights>This work is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).</dcterms:rights>
         <dcterms:rightsHolder>Dr. Rogério Blitz</dcterms:rightsHolder>
         <rdfs:label>SNOMED Ontology Module</rdfs:label>
         <rdfs:comment>
             This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology.
             It supports reasoning-compatible classification while preserving original semantic context.
         </rdfs:comment>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">0.1.2</owl:versionInfo>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.1.3</owl:versionInfo>
         <skos:changeNote rdf:resource="https://www.w3.org/2009/08/skos-reference/skos.html"/>
     </owl:Ontology>
 
