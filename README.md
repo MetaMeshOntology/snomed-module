@@ -42,7 +42,7 @@ If you use this ontology module in your work, please cite:
 > Meta Mesh Ontology – SNOMED CT Module  
 > Version 1.0.0 (2025-09-20)  
 > MetaMeshOntology GitHub  
-> [https://github.com/MetaMeshOntology/SNOMED CT-module](https://github.com/MetaMeshOntology/SNOMED CT-module)  
+> [https://github.com/MetaMeshOntology/SNOMED-module](https://github.com/MetaMeshOntology/SNOMED-module)  
 
 ## 🛠 Contributing
 
@@ -51,7 +51,7 @@ Contributions are welcome! Please open issues or submit pull requests via GitHub
 ## 📬 Contact
 
 To get involved or reach out to the maintainers, join our [Slack Workspace](https://metameshontology.slack.com).  
-You can directly join the SNOMED CT discussion channel here: [#SNOMED CT-module](https://metameshontology.slack.com/archives/C09NQGS7UCC).  
+You can directly join the SNOMED CT discussion channel here: [#SNOMED-module](https://metameshontology.slack.com/archives/C09NQGS7UCC).  
 Maintained by the [Meta Mesh Ontology Team](https://github.com/MetaMeshOntology).
 
 ---
