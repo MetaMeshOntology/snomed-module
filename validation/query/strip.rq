@@ -1,0 +1,70 @@
+# ==============================================================================
+#  strip.rq
+#  ---------------------------------------------------------------------------
+#  Cleanup Query for Removing Foreign and Anonymous Ontology Headers
+#  from RDF/OWL graphs within the Meta Mesh Ontology (MMO) environment.
+#
+#  Purpose:
+#    Removes all ontology declaration triples (owl:Ontology) that do not
+#    belong to the Core Domain Framework (CDF) ontology itself.
+#    This includes:
+#      - Ontology headers with different IRIs
+#      - Anonymous ontology declarations (blank nodes)
+#
+#  Effect:
+#    Ensures that only the canonical ontology header
+#    <http://purl.org/mit/mmo/cdf> remains in the graph.
+#
+#  Typical Use Case:
+#    Executed after importing multiple RDF sources or modules to clean up
+#    duplicate <owl:Ontology> declarations before integration or export.
+#
+#  Compatible with:
+#    - RDF 1.1 / Turtle / RDF/XML
+#    - OWL 2 DL and ROBOT validation pipelines
+#    - rdflib, Apache Jena, and Blazegraph environments
+#
+#  Author: Meta Mesh Ontology (MMO) Development Team
+#  License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+#  Repository: https://github.com/MetaMeshOntology
+# ==============================================================================
+#  Copyright (c) 2025 Meta Mesh Ontology
+#
+#  This work is licensed under a Creative Commons Attribution 4.0
+#  International License (CC BY 4.0).
+#
+#  You are free to:
+#   - Share — copy and redistribute the material in any medium or format.
+#   - Adapt — remix, transform, and build upon the material for any purpose,
+#     even commercially.
+#
+#  Under the following terms:
+#   - Attribution — You must give appropriate credit, provide a link to the
+#     license, and indicate if changes were made. You may do so in any
+#     reasonable manner, but not in any way that suggests the licensor
+#     endorses you or your use.
+#
+#  Full license text: https://creativecommons.org/licenses/by/4.0/
+# ==============================================================================
+#
+#  Output:
+#    - Removes all triples whose subject is an owl:Ontology except the
+#      official CDF ontology IRI.
+#    - Deletes anonymous ontology declarations (blank nodes).
+#    - Produces a cleaned RDF/OWL file ready for modular validation.
+#
+# ==============================================================================
+
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+
+CONSTRUCT {
+  ?s ?p ?o .
+}
+WHERE {
+  ?s ?p ?o .
+  FILTER NOT EXISTS {
+    ?s rdf:type owl:Ontology .
+    FILTER ( isBlank(?s) || ?s != <http://purl.org/mit/mmo/cdf> )
+  }
+}

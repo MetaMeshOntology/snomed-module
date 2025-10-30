@@ -9,23 +9,26 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:snomed="http://purl.bioontology.org/ontology/SNOMEDCT/"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-    xmlns:obo="http://purl.obolibrary.org/obo/"
     xmlns:mmo="http://purl.org/mit/mmo#">
 
     <!-- Metadata block describing the SNOMED ontology module and its publication details. -->    
     <!-- Contains versioning, licensing, authorship and rights declarations. -->
     <owl:Ontology rdf:about="http://purl.org/mit/mmo/modules/snomed">
-        <obo:IAO_0000115 rdf:resource="http://purl.obolibrary.org/obo/iao.owl"/>
         <dc:title>SNOMED Ontology Module for Meta Mesh Ontology</dc:title>
+        <dc:description xml:lang="en">
+            This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology.
+            It supports reasoning-compatible classification while preserving original semantic context.
+        </dc:description>
+        <dc:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
         <dcterms:title>SNOMED Ontology Module for Meta Mesh Ontology</dcterms:title>
         <dcterms:contributor>Dr. Rogério Blitz</dcterms:contributor>
         <dcterms:creator rdf:resource="https://orcid.org/0000-0002-4505-4593"/>
         <dcterms:created>2025-05-07</dcterms:created>
-        <dcterms:modified>2025-10-09</dcterms:modified>
-        <dcterms:hasVersion>0.1.3</dcterms:hasVersion>
+        <dcterms:modified>2025-10-30</dcterms:modified>
+        <dcterms:hasVersion>1.0.0</dcterms:hasVersion>
         <dcterms:isVersionOf rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
-        <!--<dcterms:issued>2025-XX-XX</dcterms:issued>-->
-        <dcterms:license rdf:resource="https://opensource.org/licenses/MIT"/>
+        <dcterms:issued>2025-10-30</dcterms:issued>
+        <dcterms:license rdf:resource="https://creativecommons.org/licenses/by/4.0/"/>
         <dcterms:publisher>Dr. Rogério Blitz</dcterms:publisher>
         <dcterms:rights>This work is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0).</dcterms:rights>
         <dcterms:rightsHolder>Dr. Rogério Blitz</dcterms:rightsHolder>
@@ -34,7 +37,7 @@
             This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology.
             It supports reasoning-compatible classification while preserving original semantic context.
         </rdfs:comment>
-        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">0.1.3</owl:versionInfo>
+        <owl:versionInfo rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1.0.0</owl:versionInfo>
         <skos:changeNote rdf:resource="https://www.w3.org/2009/08/skos-reference/skos.html"/>
     </owl:Ontology>
 
@@ -42,13 +45,15 @@
     <foaf:Person rdf:about="https://orcid.org/0000-0002-4505-4593">
         <foaf:name>Dr. Rogério Blitz</foaf:name>
     </foaf:Person>
+    <rdf:Description rdf:about="https://orcid.org/0000-0002-4505-4593">
+        <rdfs:label xml:lang="en">Dr. Rogério Blitz</rdfs:label>
+        <rdfs:comment xml:lang="en">Ontology creator identified via ORCID.</rdfs:comment>
+    </rdf:Description>
 
     <!-- Declares the SNOMED integration as a formal MMO ontology module. -->
     <!-- Enables modular reuse and refinement of ToDo concepts. -->
-    <mmo:OntologyModule rdf:about="http://purl.org/mit/mmo/modules/snomed">
+    <mmo:OntologyModule rdf:about="http://purl.org/mit/mmo/modules/snomed#Module">
         <rdfs:label>SNOMED CT Integration Module</rdfs:label>
-        <mmo:hasDomain>clinical terminology</mmo:hasDomain>
-        <mmo:isBFOCompliant xsd:datatype="xsd:boolean">true</mmo:isBFOCompliant>
         <mmo:hasScope>specific</mmo:hasScope>
         <mmo:hasUseCase>Integration of SNOMED concepts into the MMO</mmo:hasUseCase>
         <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#1144814003"/>
@@ -57,6 +62,9 @@
         <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#816160009"/>
         <mmo:definesClass rdf:resource="http://purl.org/mit/mmo/modules/snomed#6471006"/>
     </mmo:OntologyModule>
+    <rdf:Description rdf:about="http://purl.org/mit/mmo/modules/snomed#Module">
+        <mmo:isBFOCompliant>true</mmo:isBFOCompliant>
+    </rdf:Description>
 
     <!-- Describes slowed physical and mental movements, commonly seen in depression. -->
     <!-- Classified as a neuropsychiatric symptom in SNOMED CT. -->
@@ -66,10 +74,10 @@
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/43994002"/>
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#ClinicalState"/>
         <mmo:isMappedTo rdf:resource="http://purl.obolibrary.org/obo/GO_0036343"/>
-        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
+        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed#Module"/>
         <mmo:hasSource>SNOMED</mmo:hasSource>
         <dcterms:source>SNOMED Concept 1144814003</dcterms:source>
-        <owl:equivalentClass rdf:resource="snomed:1144814003"/>
+        <skos:exactMatch rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/1144814003"/>
         <skos:closeMatch rdf:resource="http://purl.obolibrary.org/obo/GO_0036343"/>
     </owl:Class>
 
@@ -82,10 +90,10 @@
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#ClinicalDisposition"/>
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#PersonCenteredDisposition"/>
         <mmo:isMappedTo rdf:resource="http://purl.obolibrary.org/obo/MFOMD_0000088"/>
-        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
+        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed#Module"/>
         <mmo:hasSource>SNOMED</mmo:hasSource>
         <dcterms:source>SNOMED Concept 44186003</dcterms:source>
-        <owl:equivalentClass rdf:resource="snomed:44186003"/>
+        <skos:exactMatch rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/44186003"/>
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/MFOMD_0000088"/>
     </owl:Class>
 
@@ -96,10 +104,10 @@
         <rdfs:comment>Reduced ability to direct, maintain, or shift attention appropriately.</rdfs:comment>
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/386806002"/>
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#ClinicalState"/>
-        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
+        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed#Module"/>
         <mmo:hasSource>SNOMED</mmo:hasSource>
         <dcterms:source>SNOMED Concept 1144748009</dcterms:source>
-        <owl:equivalentClass rdf:resource="snomed:1144748009"/>
+        <skos:exactMatch rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/1144748009"/>
     </owl:Class>
 
     <!-- Describes unintentional body weight reduction. -->
@@ -110,10 +118,10 @@
         <mmo:hasExternalParent rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/363806002"/>    
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#PhysiologicalProcess"/>
         <mmo:isMappedTo rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C3445"/>
-        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
+        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed#Module"/>
         <mmo:hasSource>SNOMED</mmo:hasSource>
         <dcterms:source>SNOMED Concept 816160009</dcterms:source>
-        <owl:equivalentClass rdf:resource="snomed:816160009"/>
+        <skos:exactMatch rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/816160009"/>
         <skos:closeMatch rdf:resource="http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C3445"/>
     </owl:Class>
 
@@ -126,10 +134,10 @@
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#ClinicalState"/>
         <mmo:isConstantRefinementOf rdf:resource="http://purl.org/mit/mmo/cdf#PersonCenteredDisposition"/>
         <mmo:isMappedTo rdf:resource="http://purl.obolibrary.org/obo/MFOMD_0000156"/>
-        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed"/>
+        <mmo:isPartOfModule rdf:resource="http://purl.org/mit/mmo/modules/snomed#Module"/>
         <mmo:hasSource>SNOMED</mmo:hasSource>
         <dcterms:source>SNOMED Concept 6471006</dcterms:source>
-        <owl:equivalentClass rdf:resource="snomed:6471006"/>
+        <skos:exactMatch rdf:resource="http://purl.bioontology.org/ontology/SNOMEDCT/6471006"/>
         <skos:exactMatch rdf:resource="http://purl.obolibrary.org/obo/MFOMD_0000156"/>
     </owl:Class>
 
