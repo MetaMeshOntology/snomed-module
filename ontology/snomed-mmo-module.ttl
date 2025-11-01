@@ -1,0 +1,116 @@
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+@prefix mmo: <http://purl.org/mit/mmo#> .
+
+@prefix obo: <http://purl.obolibrary.org/obo/> .
+
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+
+@prefix snomed: <http://purl.bioontology.org/ontology/SNOMEDCT/> .
+
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+<http://purl.org/mit/mmo/modules/snomed> a owl:Ontology ;
+    rdfs:label "SNOMED Ontology Module" ;
+ dc:description "This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology. It supports reasoning-compatible classification while preserving original semantic context."@en ;
+ dc:license <https://creativecommons.org/licenses/by/4.0/> ;
+ dc:title "SNOMED Ontology Module for Meta Mesh Ontology" ;
+ dcterms:contributor "Dr. Rogério Blitz" ;
+ dcterms:created "2025-05-07" ;
+ dcterms:creator <https://orcid.org/0000-0002-4505-4593> ;
+ dcterms:hasVersion "1.0.0" ;
+ dcterms:isVersionOf <http://purl.org/mit/mmo/modules/snomed> ;
+ dcterms:issued "2025-10-30" ;
+ dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+ dcterms:modified "2025-10-30" ;
+ dcterms:publisher "Dr. Rogério Blitz" ;
+ dcterms:rights "This work is licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0)." ;
+ dcterms:rightsHolder "Dr. Rogério Blitz" ;
+ dcterms:title "SNOMED Ontology Module for Meta Mesh Ontology" ;
+    rdfs:comment "This module integrates selected concepts from the SNOMED ontology into the Meta Mesh Ontology. It supports reasoning-compatible classification while preserving original semantic context." ;
+    owl:versionInfo "1.0.0"^^xsd:string ;
+    skos:changeNote <https://www.w3.org/2009/08/skos-reference/skos.html> .
+
+<http://purl.org/mit/mmo/modules/snomed#1144748009> a owl:Class ;
+    rdfs:label "Impaired concentration" ;
+ dcterms:source "SNOMED Concept 1144748009" ;
+    mmo:hasExternalParent snomed:386806002 ;
+    mmo:hasSource "SNOMED" ;
+    mmo:isConstantRefinementOf <http://purl.org/mit/mmo/cdf#ClinicalState> ;
+    mmo:isPartOfModule <http://purl.org/mit/mmo/modules/snomed#Module> ;
+    rdfs:comment "Reduced ability to direct , maintain , or shift attention appropriately." ;
+    skos:exactMatch snomed:1144748009 .
+
+<http://purl.org/mit/mmo/modules/snomed#1144814003> a owl:Class ;
+    rdfs:label "Psychomotor retardation" ;
+ dcterms:source "SNOMED Concept 1144814003" ;
+    mmo:hasExternalParent snomed:43994002 ;
+    mmo:hasSource "SNOMED" ;
+    mmo:isConstantRefinementOf <http://purl.org/mit/mmo/cdf#ClinicalState> ;
+    mmo:isMappedTo obo:GO_0036343 ;
+    mmo:isPartOfModule <http://purl.org/mit/mmo/modules/snomed#Module> ;
+    rdfs:comment "Slowing of thought and movement , often associated with major depressive disorder." ;
+    skos:closeMatch obo:GO_0036343 ;
+    skos:exactMatch snomed:1144814003 .
+
+<http://purl.org/mit/mmo/modules/snomed#44186003> a owl:Class ;
+    rdfs:label "Dyssomnia" ;
+ dcterms:source "SNOMED Concept 44186003" ;
+    mmo:hasExternalParent snomed:39898005 ;
+    mmo:hasSource "SNOMED" ;
+    mmo:isConstantRefinementOf <http://purl.org/mit/mmo/cdf#ClinicalDisposition> ,
+ <http://purl.org/mit/mmo/cdf#PersonCenteredDisposition> ;
+    mmo:isMappedTo obo:MFOMD_0000088 ;
+    mmo:isPartOfModule <http://purl.org/mit/mmo/modules/snomed#Module> ;
+    rdfs:comment "Disruption in the quality , timing , or amount of sleep affecting daily functioning." ;
+    skos:exactMatch snomed:44186003 ,
+    obo:MFOMD_0000088 .
+
+<http://purl.org/mit/mmo/modules/snomed#6471006> a owl:Class ;
+    rdfs:label "Suicidal thoughts" ;
+ dcterms:source "SNOMED Concept 6471006" ;
+    mmo:hasExternalParent snomed:102911000 ;
+    mmo:hasSource "SNOMED" ;
+    mmo:isConstantRefinementOf <http://purl.org/mit/mmo/cdf#ClinicalState> ,
+ <http://purl.org/mit/mmo/cdf#PersonCenteredDisposition> ;
+    mmo:isMappedTo obo:MFOMD_0000156 ;
+    mmo:isPartOfModule <http://purl.org/mit/mmo/modules/snomed#Module> ;
+    rdfs:comment "Ideation or mental imagery involving self-inflicted death." ;
+    skos:exactMatch snomed:6471006 ,
+    obo:MFOMD_0000156 .
+
+<http://purl.org/mit/mmo/modules/snomed#816160009> a owl:Class ;
+    rdfs:label "Weight loss" ;
+ dcterms:source "SNOMED Concept 816160009" ;
+    mmo:hasExternalParent snomed:363806002 ;
+    mmo:hasSource "SNOMED" ;
+    mmo:isConstantRefinementOf <http://purl.org/mit/mmo/cdf#PhysiologicalProcess> ;
+    mmo:isMappedTo <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C3445> ;
+    mmo:isPartOfModule <http://purl.org/mit/mmo/modules/snomed#Module> ;
+    rdfs:comment "Involuntary loss of body mass over a defined period of time." ;
+    skos:closeMatch <http://ncicb.nci.nih.gov/xml/owl/EVS/Thesaurus.owl#C3445> ;
+    skos:exactMatch snomed:816160009 .
+
+<https://orcid.org/0000-0002-4505-4593> a foaf:Person ;
+    rdfs:label "Dr. Rogério Blitz"@en ;
+    rdfs:comment "Ontology creator identified via ORCID."@en ;
+ foaf:name "Dr. Rogério Blitz" .
+
+<http://purl.org/mit/mmo/modules/snomed#Module> a mmo:OntologyModule ;
+    rdfs:label "SNOMED CT Integration Module" ;
+    mmo:definesClass <http://purl.org/mit/mmo/modules/snomed#1144748009> ,
+ <http://purl.org/mit/mmo/modules/snomed#1144814003> ,
+ <http://purl.org/mit/mmo/modules/snomed#44186003> ,
+ <http://purl.org/mit/mmo/modules/snomed#6471006> ,
+ <http://purl.org/mit/mmo/modules/snomed#816160009> ;
+    mmo:hasScope "specific" ;
+    mmo:hasUseCase "Integration of SNOMED concepts into the MMO" ;
+    mmo:isBFOCompliant "true" .

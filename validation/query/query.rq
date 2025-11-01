@@ -1,0 +1,282 @@
+# ==============================================================================
+#  query.rq
+#  ---------------------------------------------------------------------------
+#  Ontology Construction and Cleanup Query for the Modules
+#  of the Meta Mesh Ontology (MMO).
+#
+#  Performs:
+#    1. Declares and annotates the MMO Core Domain Framework ontology header
+#    2. Cleans RDF literals (trimming whitespace and newline artifacts)
+#    3. Automatically defines missing MMO core properties and classes
+#    4. Ensures all MMO modules include minimal annotations (label, definition)
+#    5. Declares ROBOT-compatible annotation properties for OWL 2 validation
+#    6. Exports a coherent and complete RDF graph suitable for downstream
+#       validation and modular integration
+#
+#  Compatible with:
+#    - RDF 1.1 / Turtle / RDF/XML
+#    - OWL 2 DL and ROBOT validation pipelines
+#    - rdflib, Apache Jena, and Blazegraph environments
+#
+#  Author: Meta Mesh Ontology (MMO) Development Team
+#  License: Creative Commons Attribution 4.0 International (CC BY 4.0)
+#  Repository: https://github.com/MetaMeshOntology
+# ==============================================================================
+#  Copyright (c) 2025 Meta Mesh Ontology
+#
+#  This work is licensed under a Creative Commons Attribution 4.0
+#  International License (CC BY 4.0).
+#
+#  You are free to:
+#   - Share — copy and redistribute the material in any medium or format.
+#   - Adapt — remix, transform, and build upon the material for any purpose,
+#     even commercially.
+#
+#  Under the following terms:
+#   - Attribution — You must give appropriate credit, provide a link to the
+#     license, and indicate if changes were made. You may do so in any
+#     reasonable manner, but not in any way that suggests the licensor
+#     endorses you or your use.
+#
+#  Full license text: https://creativecommons.org/licenses/by/4.0/
+# ==============================================================================
+#
+#  Output:
+#    - Adds standardized ontology metadata (dc:, dcterms:, IAO:, skos:)
+#    - Normalizes annotations and enforces structural completeness
+#    - Produces a cleaned OWL/RDF/XML export ready for integration into
+#      the MMO master ontology
+#
+# ==============================================================================
+
+PREFIX mmo:  <http://purl.org/mit/mmo#>
+PREFIX cdf:  <http://purl.org/mit/mmo/cdf#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX dc:   <http://purl.org/dc/elements/1.1/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX IAO:  <http://purl.obolibrary.org/obo/IAO_>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+CONSTRUCT {
+
+  # ---- 0) Valid module assignment repair ----
+  ?s mmo:isPartOfModule ?o .
+
+  # ---- 1) Ontology header definition ----
+  <http://purl.org/mit/mmo/cdf> a owl:Ontology ;
+    rdfs:label "Meta Mesh Ontology - Core Domain Framework"@en ;
+    dc:title "Meta Mesh Ontology - Core Domain Framework"@en ;
+    dc:description "The Core Domain Framework (CDF) defines the top-level domain structure of the Meta Mesh Ontology (MMO). It enables consistent integration of heterogeneous knowledge domains from UNESCO, SDG, FOS, LCC, and related sources. Each top-level class is disjoint and represents a distinct epistemological domain."@en ;
+    dcterms:title "Meta Mesh Ontology - Core Domain Framework"@en ;
+    dcterms:license <https://creativecommons.org/licenses/by/4.0/> ;
+    dcterms:creator <https://orcid.org/0000-0002-4505-4593> ;
+    dcterms:publisher "Dr. Rogério Blitz" ;
+    dcterms:contributor "Dr. Rogério Blitz" ;
+    dcterms:hasVersion "0.1.1" ;
+    dcterms:isVersionOf <http://purl.org/mit/mmo/cdf> ;
+    owl:versionInfo "0.1.1" ;
+    IAO:0000115 "Core Domain Framework Ontology = Def. Top-level structural module of the Meta Mesh Ontology providing domain anchors for semantic interoperability across disciplines."@en ;
+    skos:changeNote <https://www.w3.org/2009/08/skos-reference/skos.html> .
+
+  # ---- 2) Cleaned triples ----
+  ?s ?p ?cleaned .
+
+  # ---- 3) Declared annotation properties ----
+  ?ap rdf:type owl:AnnotationProperty ;
+      rdfs:label ?apLabel .
+
+  # ---- 4) Auto-generated labels and definitions ----
+  ?miss IAO:0000115 ?autoDef .
+  ?ls rdfs:label ?autoLabel .
+
+  # ---- 5) Ensure CDF Entities are typed as Classes ----
+  ?fix rdf:type owl:Class .
+}
+
+WHERE {
+
+  ###########################################################################
+  # 🧩 0) SAFETY FILTERS
+  ###########################################################################
+  # Exclude OWL Axioms and their parts (prevent annotation destruction)
+  FILTER NOT EXISTS { ?s a owl:Axiom . }
+  FILTER NOT EXISTS { ?s owl:annotatedSource ?src . }
+  FILTER NOT EXISTS { ?s owl:annotatedProperty ?prop . }
+  FILTER NOT EXISTS { ?s owl:annotatedTarget ?tgt . }
+
+  # Exclude direct triples using MMO core properties as subjects
+  FILTER(?s NOT IN (
+    mmo:isPartOfModule,
+    mmo:isConstantRefinementOf,
+    mmo:isConstantGeneralizationOf,
+    mmo:isTemporalRefinementOf,
+    mmo:isTemporalGeneralizationOf,
+    mmo:hasDomain,
+    mmo:hasExternalParent,
+    mmo:isMappedTo
+  ))
+
+  ###########################################################################
+  # (1) Repair misused module assignments (only IRI objects)
+  ###########################################################################
+  {
+    ?s rdfs:isPartOfModule ?o .
+    FILTER(isIRI(?o))
+    FILTER(?o NOT IN (owl:Class, owl:NamedIndividual))
+  }
+  UNION
+
+  ###########################################################################
+  # (2) Clean and normalize literals from MMO and CDF modules
+  ###########################################################################
+  {
+    ?s ?p ?o .
+    FILTER(
+      (isIRI(?s) && STRSTARTS(STR(?s), "http://purl.org/mit/mmo#")) ||
+      (isIRI(?o) && STRSTARTS(STR(?o), "http://purl.org/mit/mmo#")) ||
+      (isIRI(?p) && STRSTARTS(STR(?p), "http://purl.org/mit/mmo#")) ||
+      (isIRI(?s) && STRSTARTS(STR(?s), "http://purl.org/mit/mmo/cdf#")) ||
+      (isIRI(?s) && STRSTARTS(STR(?s), "http://purl.org/mit/mmo/modules/"))
+    )
+
+    # exclude broken module links (no literals as module targets)
+    FILTER( !(
+      ?p = mmo:isPartOfModule &&
+      (
+        !isIRI(?o) ||
+        ?o IN (owl:Class, owl:NamedIndividual)
+      )
+    ))
+
+    # exclude wrong typing of CDF entities
+    FILTER( !(
+      STRSTARTS(STR(?s), "http://purl.org/mit/mmo/cdf#") &&
+      ?p = rdf:type && ?o = owl:NamedIndividual
+    ))
+
+    BIND(
+      IF(
+        isLiteral(?o),
+        IF(
+          LANG(?o) != "",
+          STRLANG(REPLACE(REPLACE(STR(?o), "^[\\s\\n]+", ""), "[\\s\\n]+$", ""), LANG(?o)),
+          REPLACE(REPLACE(STR(?o), "^[\\s\\n]+", ""), "[\\s\\n]+$", "")
+        ),
+        ?o
+      ) AS ?cleaned
+    )
+  }
+  UNION
+
+  ###########################################################################
+  # (3) Define missing MMO Core Terms
+  ###########################################################################
+  {
+    VALUES (?miss ?autoDef) {
+      (mmo:OntologyModule             "Ontology module = Def. an organizational unit that structures and groups ontology content for modular reuse and interoperability."@en)
+      (mmo:definesClass               "Defines class = Def. a relation linking an ontology module to the classes it formally defines or integrates."@en)
+      (mmo:hasDomain                  "Has domain = Def. a property specifying the domain or field to which an ontology module or term applies."@en)
+      (mmo:hasExternalParent          "Has external parent = Def. links an MMO term to its corresponding parent in an external ontology for traceability."@en)
+      (mmo:hasScope                   "Has scope = Def. describes the conceptual or domain coverage of an ontology module."@en)
+      (mmo:hasSource                  "Has source = Def. identifies the authoritative source or provenance of an ontology element."@en)
+      (mmo:hasUseCase                 "Has use case = Def. describes intended or actual applications of an ontology module."@en)
+      (mmo:isBFOCompliant             "Is BFO compliant = Def. indicates alignment with Basic Formal Ontology principles and categories."@en)
+      (mmo:isConstantGeneralizationOf "Is constant generalization of = Def. relates a broader constant-level category to a refinement."@en)
+      (mmo:isConstantRefinementOf     "Is constant refinement of = Def. relates a narrower constant-level specialization to a general concept."@en)
+      (mmo:isMappedTo                 "Is mapped to = Def. links a concept to its semantic counterpart in another ontology."@en)
+      (mmo:isPartOfModule             "Is part of module = Def. connects a class or property to the module that contains it."@en)
+      (mmo:isTemporalGeneralizationOf "Is temporal generalization of = Def. links a broader temporal category to its specific event instances."@en)
+      (mmo:isTemporalRefinementOf     "Is temporal refinement of = Def. links a specific temporal instance to its general process type."@en)
+      (mmo:isUsedBy                   "Is used by = Def. describes systems or modules that utilize this ontology module."@en)
+    }
+    FILTER NOT EXISTS { ?miss IAO:0000115 ?anyDef . }
+  }
+  UNION
+
+  ###########################################################################
+  # (4) Auto-generate placeholder definitions for module classes
+  ###########################################################################
+  {
+    ?miss a owl:Class .
+    FILTER(
+      STRSTARTS(STR(?miss), "http://purl.org/mit/mmo/modules/") ||
+      EXISTS {
+        ?miss mmo:isPartOfModule ?mod .
+        FILTER(STRSTARTS(STR(?mod), "http://purl.org/mit/mmo/modules/"))
+      }
+    )
+    FILTER NOT EXISTS { ?miss IAO:0000115 ?anyDef . }
+    BIND(
+      CONCAT(
+        "Definition intentionally omitted in MMO module; see external ontology for authoritative description (class: ",
+        COALESCE(STRAFTER(STR(?miss), "#"), STR(?miss)),
+        ")."
+      ) AS ?autoDef
+    )
+  }
+  UNION
+
+  ###########################################################################
+  # (5) Auto-generate labels for unlabeled MMO terms
+  ###########################################################################
+  {
+    BIND(?s AS ?ls)
+    ?ls ?anyP ?anyO .
+    FILTER( STRSTARTS(STR(?ls), "http://purl.org/mit/mmo/") )
+    FILTER NOT EXISTS { ?ls rdfs:label ?lbl . }
+    BIND(
+      STRLANG(
+        REPLACE(
+          REPLACE(
+            COALESCE(STRAFTER(STR(?ls), "#"), STRAFTER(STR(?ls), "/")),
+            "([a-z])([A-Z])", "$1 $2"
+          ),
+          "_", " "
+        ),
+        "en"
+      ) AS ?autoLabel
+    )
+  }
+  UNION
+
+  ###########################################################################
+  # (6) Declare ROBOT-compatible annotation properties
+  ###########################################################################
+  {
+    VALUES (?ap ?apLabel ?apDef) {
+      (IAO:0000115 "textual definition" "Textual definition property providing human-readable definitions."@en)
+      (IAO:0000111 "editor preferred label" "Editor preferred label property used for preferred naming of entities."@en)
+      (IAO:0000112 "example of usage" "Example of usage property to illustrate entity meaning."@en)
+      (IAO:0000232 "curator note" "Curator note property for ontology maintainers and editors."@en)
+      (dc:description "description" "Descriptive annotation for ontology elements."@en)
+      (rdfs:label "label" "Human-readable label annotation property."@en)
+      (rdfs:comment "comment" "General comment or note annotation property."@en)
+    }
+  }
+  UNION
+
+  ###########################################################################
+  # (7) Fallback for missing CDF:Module label or definition
+  ###########################################################################
+  {
+    FILTER NOT EXISTS { cdf:Module rdfs:label ?lbl . }
+    FILTER NOT EXISTS { cdf:Module IAO:0000115 ?def . }
+    BIND(cdf:Module AS ?s)
+  }
+  UNION
+
+  ###########################################################################
+  # (8) Force the 5 CDF Entities to be Classes (not individuals)
+  ###########################################################################
+  {
+    VALUES ?fix {
+      cdf:GovernanceBearingEntity
+      cdf:NaturalBearingEntity
+      cdf:NaturalPhenotypeQuality
+      cdf:TechnicalBearingEntity
+      cdf:TechnicalPerformanceQuality
+    }
+  }
+}
