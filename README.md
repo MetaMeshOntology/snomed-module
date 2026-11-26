@@ -42,7 +42,17 @@ If you use this ontology module in your work, please cite:
 > Meta Mesh Ontology – SNOMED CT Module  
 > Version 1.0.0 (2025-09-20)  
 > MetaMeshOntology GitHub  
-> [https://github.com/MetaMeshOntology/SNOMED-module](https://github.com/MetaMeshOntology/SNOMED-module)  
+> [https://github.com/MetaMeshOntology/SNOMED-module](https://github.com/MetaMeshOntology/SNOMED-module)
+
+For background on the MMO framework and evaluation, also cite:
+
+Blitz R, Richter M, Kerber A, Leenings R, Thun S, Opel N.
+Meta Mesh Ontology for Cross-Domain Mental Health Knowledge Integration:
+Development and Evaluation Study.
+JMIR Ment Health. 2026;13:e96311.
+https://doi.org/10.2196/96311
+
+For reproducibility, also identify the artifact release or Git commit used in your work.
 
 ## 🛠 Contributing
 
